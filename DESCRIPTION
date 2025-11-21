@@ -29,3 +29,5 @@ Depends:
     shinyWidgets,
     tibble,
     tidyverse
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.1

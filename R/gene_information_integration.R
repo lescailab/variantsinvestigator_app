@@ -1,5 +1,13 @@
-
+#' Title
+#'
+#' @param res
+#'
+#' @return
+#' @export
+#'
+#' @examples
 gene_information_integration <- function(res){
+
 
   res$strand[res$strand == -1] <- "-"
   res$strand[res$strand == 1] <- "+"

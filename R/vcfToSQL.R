@@ -1,6 +1,14 @@
 library(shiny)
 library(shinyFiles)
 
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 vcfToSQL <- function(...){
 
   # Define UI for the application

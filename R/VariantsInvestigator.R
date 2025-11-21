@@ -1,3 +1,11 @@
+#' Title
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 VariantsInvestigator <- function(...){
 
   ui <- page_sidebar(
