@@ -12,3 +12,14 @@ LazyData: true
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+Depends: 
+    bslib,
+    DBI,
+    DT,
+    gt,
+    RSQLite,
+    shiny,
+    shinyFiles,
+    shinyWidgets,
+    tibble,
+    tidyverse
