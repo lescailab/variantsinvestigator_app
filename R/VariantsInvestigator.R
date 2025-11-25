@@ -1,11 +1,15 @@
-#' Title
+
+#' VariantsInvestigator app core
 #'
-#' @param ...
+#' @import bslib, DBI, DT, GenomicFeatures, GenomicRanges, gt, Gviz, IRanges, R (>= 4.0), reticulate, RSQLite, shiny, shinyFiles, shinyWidgets, tibble, tidyverse
 #'
-#' @return
-#' @export
+#' @param .sqlite
 #'
-#' @examples
+#' @return a dataset of filtered variants
+#'
+#' @export .xlsx
+#'
+#'
 VariantsInvestigator <- function(...){
 
   ui <- page_sidebar(

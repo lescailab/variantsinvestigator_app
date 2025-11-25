@@ -1,14 +1,15 @@
-library(shiny)
-library(shinyFiles)
-
-#' Title
+`VCFtoSQL`
+#' VCFtoSQL shiny app
 #'
-#' @param ...
+#' @param .vcf.gz
 #'
-#' @return
-#' @export
+#' @import shiny, shinyfiles, reticulate
 #'
-#' @examples
+#' @return an SQL database containing the VCF informations split in two tables containing the data, namely
+#' genotype and variants, and a third table containing rejected lines with the reason of the rejection
+#'
+#'
+#'
 vcfToSQL <- function(...){
 
   # Define UI for the application

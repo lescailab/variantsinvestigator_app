@@ -1,11 +1,13 @@
-#' Title
+#' Gene visualisation functions
 #'
-#' @param res
+#' @import Gviz, GRanges, IRanges
 #'
-#' @return
-#' @export
+#' @param res a specific gene containing variants
 #'
-#' @examples
+#' @return an image displaying the positioning of the variants relative to the gene transcripts
+#'
+#'
+#'
 gene_information_integration <- function(res){
 
 
