@@ -1,4 +1,3 @@
-`VCFtoSQL`
 #' VCFtoSQL shiny app
 #'
 #' @param .vcf.gz
@@ -11,6 +10,8 @@
 #'
 #'
 vcfToSQL <- function(...){
+
+  library(shinyFiles)
 
   # Define UI for the application
   ui <- fluidPage(
@@ -29,27 +30,27 @@ vcfToSQL <- function(...){
 
     source_python("inst/convert_vcf_to_sql.py")
 
-    volumes <- shinyFiles::getVolumes()()
+    volumes <- getVolumes()()
 
-    shinyFiles::shinyFileChoose(input, "vcf_file",
+    shinyFileChoose(input, "vcf_file",
                                 roots = volumes,
                                 session = session,
                                 filetypes = c("vcf", "gz"))
 
-    shinyFiles::shinyFileSave(input, "sqlite_file",
+    shinyFileSave(input, "sqlite_file",
                               roots = volumes,
                               session = session)
 
     output$vcf_path <- renderText({
       req(input$vcf_file)
-      vcf_info <- shinyFiles::parseFilePaths(volumes, input$vcf_file)
+      vcf_info <- parseFilePaths(volumes, input$vcf_file)
       if (nrow(vcf_info) == 0) return("")
       as.character(vcf_info$datapath)
     })
 
     output$sqlite_path <- renderText({
       req(input$sqlite_file)
-      db_info <- shinyFiles::parseSavePath(volumes, input$sqlite_file)
+      db_info <- parseSavePath(volumes, input$sqlite_file)
       if (nrow(db_info) == 0) return("")
       as.character(db_info$datapath)
     })
@@ -57,8 +58,8 @@ vcfToSQL <- function(...){
     observeEvent(input$run_convert, {
       req(input$vcf_file, input$sqlite_file)
 
-      vcf_info <- shinyFiles::parseFilePaths(volumes, input$vcf_file)
-      db_info  <- shinyFiles::parseSavePath(volumes, input$sqlite_file)
+      vcf_info <- parseFilePaths(volumes, input$vcf_file)
+      db_info  <- parseSavePath(volumes, input$sqlite_file)
 
       req(nrow(vcf_info) > 0, nrow(db_info) > 0)
 

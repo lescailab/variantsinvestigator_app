@@ -2,13 +2,17 @@
 % Please edit documentation in R/vcfToSQL.R
 \name{vcfToSQL}
 \alias{vcfToSQL}
-\title{Title}
+\title{VCFtoSQL shiny app}
 \usage{
 vcfToSQL(...)
 }
 \arguments{
-\item{...}{}
+\item{.vcf.gz}{}
+}
+\value{
+an SQL database containing the VCF informations split in two tables containing the data, namely
+genotype and variants, and a third table containing rejected lines with the reason of the rejection
 }
 \description{
-Title
+VCFtoSQL shiny app
 }

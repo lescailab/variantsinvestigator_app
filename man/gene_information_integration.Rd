@@ -2,13 +2,16 @@
 % Please edit documentation in R/gene_information_integration.R
 \name{gene_information_integration}
 \alias{gene_information_integration}
-\title{Title}
+\title{Gene visualisation functions}
 \usage{
 gene_information_integration(res)
 }
 \arguments{
-\item{res}{}
+\item{res}{a specific gene containing variants}
+}
+\value{
+an image displaying the positioning of the variants relative to the gene transcripts
 }
 \description{
-Title
+Gene visualisation functions
 }

@@ -2,13 +2,16 @@
 % Please edit documentation in R/VariantsInvestigator.R
 \name{VariantsInvestigator}
 \alias{VariantsInvestigator}
-\title{Title}
+\title{VariantsInvestigator app core}
 \usage{
 VariantsInvestigator(...)
 }
 \arguments{
-\item{...}{}
+\item{.sqlite}{}
+}
+\value{
+a dataset of filtered variants
 }
 \description{
-Title
+VariantsInvestigator app core
 }

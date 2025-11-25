@@ -26,6 +26,7 @@ Depends:
     RSQLite,
     shiny,
     shinyFiles,
+    shinytest2,
     shinyWidgets,
     tibble,
     tidyverse
