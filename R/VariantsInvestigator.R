@@ -93,26 +93,6 @@ VariantsInvestigator <- function(...){
         multiple = TRUE
       ),
 
-      #genotype filter
-      pickerInput
-      (
-        inputId = "genotype",
-        label = "Genotype",
-        choices = c("0/1",
-                    "1/1",
-                    "1/0",
-                    "0|1",
-                    "1|1",
-                    "1|0"),
-        selected = c("0/1",
-                     "1/1",
-                     "1/0",
-                     "0|1",
-                     "1|1",
-                     "1|0"),
-        options = c(`actions-box` = TRUE),
-        multiple = TRUE
-      ),
 
       #labfindings
       div(
@@ -439,16 +419,18 @@ VariantsInvestigator <- function(...){
         dplyr::filter(grepl(paste0("^", input$searchgene),
                             symbol,
                             ignore.case = TRUE)) %>%
-        dplyr::filter(grepl(paste(input$conseq, collapse = "|"),
-                            consequence)) %>%
-        dplyr::filter(grepl(paste(c(input$clinsign), collapse = "|"),
-                            clin_sig)) %>%
-        dplyr::filter(grepl(paste(c(input$genotype), collapse = "|"),
-                            gt)) %>%
+        dplyr::filter(str_detect(paste(input$conseq, collapse = "|"),
+                                 consequence))
+
+      sqloutput <-  sqloutput %>%
+        dplyr::filter(str_detect(paste(input$clinsign, collapse = "|"),
+                                 clin_sig))
+      sqloutput <- sqloutput %>%
         dplyr::filter(case_when(
           input$labf != 100 ~ pubmed_count <= input$labf,
           input$labf == 100 ~ is.numeric(pubmed_count)
         ))
+
 
 
       sqloutput <- sqloutput %>%
@@ -598,7 +580,7 @@ VariantsInvestigator <- function(...){
         dplyr::select("symbol", "var_position") %>%
         rename("symbol" = "gene")
 
-      tissues_results <- dbConnect(RSQLite::SQLite(), "data/express_data.sqlite")
+      tissues_results <- dbConnect(RSQLite::SQLite(), "express_data.sqlite")
       vars_expression <- dbSendQuery(tissues_results, paste("SELECT *
                           FROM expression_data
                           WHERE gene LIKE ?"),
