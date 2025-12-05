@@ -1,16 +1,29 @@
-
 #' VariantsInvestigator app core
 #'
-#' @import bslib, DBI, DT, GenomicFeatures, GenomicRanges, gt, Gviz, IRanges, R (>= 4.0), reticulate, RSQLite, shiny, shinyFiles, shinyWidgets, tibble, tidyverse
+#' @description
+#' Launches the main Shiny application for investigating variants from the generated SQLite database.
 #'
-#' @param .sqlite
+#' @import bslib
+#' @import DBI
+#' @import DT
+#' @import GenomicFeatures
+#' @import GenomicRanges
+#' @import gt
+#' @import Gviz
+#' @import IRanges
+#' @import reticulate
+#' @import RSQLite
+#' @import shiny
+#' @import shinyFiles
+#' @import shinyWidgets
+#' @import tibble
+#' @import tidyverse
+#' @import stringr
 #'
-#' @return a dataset of filtered variants
+#' @return A Shiny app object
 #'
-#' @export .xlsx
-#'
-#'
-VariantsInvestigator <- function(...){
+#' @export
+VariantsInvestigator <- function(){
 
   ui <- page_sidebar(
     sidebar = sidebar(

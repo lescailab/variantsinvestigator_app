@@ -1,6 +1,8 @@
 #' Gene visualisation functions
 #'
-#' @import Gviz, GRanges, IRanges
+#' @import Gviz
+#' @import GenomicRanges
+#' @import IRanges
 #'
 #' @param res a specific gene containing variants
 #'
