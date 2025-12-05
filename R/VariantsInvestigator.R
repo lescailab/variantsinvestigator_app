@@ -39,7 +39,7 @@ VariantsInvestigator <- function(){
 
 
       #standard theme
-      theme = light,
+      theme = get_light_theme(),
 
       #night mode switch
       materialSwitch
@@ -377,7 +377,7 @@ VariantsInvestigator <- function(){
 
     #theme handler
     observe(session$setCurrentTheme(
-      if (isTRUE(input$dark_mode)) dark else light
+      if (isTRUE(input$dark_mode)) get_dark_theme() else get_light_theme()
     ))
 
     #app logo

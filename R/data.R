@@ -1,37 +1,4 @@
 
-#' Object defining the app's light mode ui layout
-#'
-#' @name light
-#'
-#'
-#' @format ## `R object`
-#' An object describing the ui light mode's colour patterns
-#' \describe{
-#'  \item{light}{a bstheme object containing information on theme and colours of the application's light mode}
-#'  }
-#'
-#'
-
-"light"
-
-
-#' Object defining the app's dark mode ui layout
-#'
-#' @name dark
-#'
-#'
-#' @format ## `R object`
-#' An object describing the ui dark mode's colour patterns
-#' \describe{
-#'  \item{dark}{a bstheme object containing information on theme and colours of the application's dark mode}
-#'  }
-#'
-#'
-
-"dark"
-
-
-
 #' Dataset containing exome references for gene matching
 #'
 #' @name refgenome_model
