@@ -1,6 +1,8 @@
 #' Gene visualisation functions
 #'
-#' @import Gviz, GRanges, IRanges
+#' @importFrom Gviz AnnotationTrack IdeogramTrack GenomeAxisTrack GeneRegionTrack plotTracks getScheme addScheme
+#' @import GenomicRanges
+#' @import IRanges
 #'
 #' @param res a specific gene containing variants
 #'

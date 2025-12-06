@@ -4,14 +4,11 @@
 \alias{VariantsInvestigator}
 \title{VariantsInvestigator app core}
 \usage{
-VariantsInvestigator(...)
-}
-\arguments{
-\item{.sqlite}{}
+VariantsInvestigator()
 }
 \value{
-a dataset of filtered variants
+A Shiny app object
 }
 \description{
-VariantsInvestigator app core
+Launches the main Shiny application for investigating variants from the generated SQLite database.
 }

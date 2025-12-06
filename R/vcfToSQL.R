@@ -1,17 +1,17 @@
 #' VCFtoSQL shiny app
 #'
-#' @param .vcf.gz
+#' @description
+#' Launches a Shiny application to convert a VCF file into an SQLite database.
+#' The database will contain tables for variants, genotypes, and rejected lines.
 #'
-#' @import shiny, shinyfiles, reticulate
+#' @import shiny
+#' @import shinyFiles
+#' @importFrom reticulate source_python
 #'
-#' @return an SQL database containing the VCF informations split in two tables containing the data, namely
-#' genotype and variants, and a third table containing rejected lines with the reason of the rejection
+#' @return A Shiny app object
 #'
-#'
-#'
-vcfToSQL <- function(...){
-
-  library(shinyFiles)
+#' @export
+vcfToSQL <- function(){
 
   # Define UI for the application
   ui <- fluidPage(
@@ -28,7 +28,21 @@ vcfToSQL <- function(...){
   # Define server logic
   server <- function(input, output, session) {
 
-    source_python("inst/convert_vcf_to_sql.py")
+    script_path <- system.file("convert_vcf_to_sql.py", package = "variantsinvestigator")
+    if (script_path == "") {
+      # Fallback for local testing if package is not installed but loaded via load_all or source
+      script_path <- "inst/convert_vcf_to_sql.py"
+      if (!file.exists(script_path)) {
+         # Try looking one level up just in case (e.g. if working directory is R/)
+         script_path <- "../inst/convert_vcf_to_sql.py"
+      }
+    }
+    
+    if (file.exists(script_path)) {
+        source_python(script_path)
+    } else {
+        stop("Python script convert_vcf_to_sql.py not found.")
+    }
 
     volumes <- getVolumes()()
 

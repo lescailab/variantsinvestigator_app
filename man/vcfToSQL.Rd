@@ -4,15 +4,12 @@
 \alias{vcfToSQL}
 \title{VCFtoSQL shiny app}
 \usage{
-vcfToSQL(...)
-}
-\arguments{
-\item{.vcf.gz}{}
+vcfToSQL()
 }
 \value{
-an SQL database containing the VCF informations split in two tables containing the data, namely
-genotype and variants, and a third table containing rejected lines with the reason of the rejection
+A Shiny app object
 }
 \description{
-VCFtoSQL shiny app
+Launches a Shiny application to convert a VCF file into an SQLite database.
+The database will contain tables for variants, genotypes, and rejected lines.
 }
