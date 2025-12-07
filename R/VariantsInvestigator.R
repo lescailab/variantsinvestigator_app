@@ -1,16 +1,32 @@
-
 #' VariantsInvestigator app core
 #'
-#' @import bslib, DBI, DT, GenomicFeatures, GenomicRanges, gt, Gviz, IRanges, R (>= 4.0), reticulate, RSQLite, shiny, shinyFiles, shinyWidgets, tibble, tidyverse
+#' @description
+#' Launches the main Shiny application for investigating variants from the generated SQLite database.
 #'
-#' @param .sqlite
+#' @import bslib
+#' @import DBI
+#' @importFrom DT datatable
+#' @import GenomicFeatures
+#' @import GenomicRanges
+#' @import gt
+#' @importFrom Gviz AnnotationTrack IdeogramTrack GenomeAxisTrack GeneRegionTrack plotTracks
+#' @import IRanges
+#' @import reticulate
+#' @import RSQLite
+#' @import shiny
+#' @importFrom dplyr mutate filter select arrange relocate group_by summarise rename ungroup distinct case_when n rowwise
+#' @importFrom tidyr separate_wider_delim
+#' @importFrom purrr map
+#' @importFrom utils write.table
+#' @importFrom stringr str_count str_sub str_detect
+#' @import tibble
+#' @import shinyFiles
+#' @import shinyWidgets
 #'
-#' @return a dataset of filtered variants
+#' @return A Shiny app object
 #'
-#' @export .xlsx
-#'
-#'
-VariantsInvestigator <- function(...){
+#' @export
+VariantsInvestigator <- function(){
 
   ui <- page_sidebar(
     sidebar = sidebar(
@@ -23,7 +39,7 @@ VariantsInvestigator <- function(...){
 
 
       #standard theme
-      theme = light,
+      theme = get_light_theme(),
 
       #night mode switch
       materialSwitch
@@ -304,7 +320,7 @@ VariantsInvestigator <- function(...){
       #variant table tab
       nav_panel(
         "Variants",
-        DTOutput(outputId = "table"),
+        DT::DTOutput(outputId = "table"),
         fillable = FALSE,
 
       ),
@@ -314,7 +330,7 @@ VariantsInvestigator <- function(...){
         "Tissues expression scores",
         uiOutput("dropdownbutt2"),
         uiOutput("notefilter"),
-        DTOutput(outputId = "tissue_info")
+        DT::DTOutput(outputId = "tissue_info")
 
       ),
 
@@ -330,7 +346,7 @@ VariantsInvestigator <- function(...){
       #number of mutations per gene tab
       nav_panel(
         "Mutations on each gene",
-        DTOutput(outputId = "symbol_num")
+        DT::DTOutput(outputId = "symbol_num")
 
       )
     )
@@ -341,7 +357,7 @@ VariantsInvestigator <- function(...){
 
     #theme handler
     observe(session$setCurrentTheme(
-      if (isTRUE(input$dark_mode)) dark else light
+      if (isTRUE(input$dark_mode)) get_dark_theme() else get_light_theme()
     ))
 
     #app logo
@@ -365,7 +381,7 @@ VariantsInvestigator <- function(...){
 
       #error message for no file input
       s_file <- parseFilePaths(
-        root=c(root='.'), input$files)
+        roots=c(root='.'), input$files)
       validate(
         need(s_file$datapath != "", message = "Please select a data set"
         )
@@ -657,7 +673,7 @@ VariantsInvestigator <- function(...){
       )
     })
 
-    output$symbol_num <- renderDT({
+    output$symbol_num <- DT::renderDT({
 
       #number of variants per gene table
       data_vars <- sqlfunc() %>%

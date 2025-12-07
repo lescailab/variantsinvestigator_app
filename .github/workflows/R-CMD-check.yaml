@@ -21,9 +21,8 @@ jobs:
         config:
           - {os: macos-latest,   r: 'release'}
           - {os: windows-latest, r: 'release'}
-          - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
-          - {os: ubuntu-latest,   r: 'release'}
-          - {os: ubuntu-latest,   r: 'oldrel-1'}
+          - {os: ubuntu-22.04,   r: 'release'}
+          - {os: ubuntu-22.04,   r: 'oldrel-1'}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -41,9 +40,17 @@ jobs:
           use-public-rspm: true
 
       - uses: r-lib/actions/setup-r-dependencies@v2
+        if: runner.os != 'macOS'
         with:
           extra-packages: any::rcmdcheck
           needs: check
+          
+      - name: Install dependencies (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          install.packages(c("remotes", "rcmdcheck", "BiocManager"))
+          remotes::install_deps(dependencies = TRUE, repos = BiocManager::repositories())
+        shell: Rscript {0}
 
       - uses: r-lib/actions/check-r-package@v2
         with:
